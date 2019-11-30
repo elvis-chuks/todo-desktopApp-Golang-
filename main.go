@@ -11,10 +11,14 @@ import (
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/widget"
 	"fyne.io/fyne"
-	// "fyne.io/fyne/theme"
+	"fyne.io/fyne/theme"
 )
 
-
+func test() fyne.Widget{
+	return widget.NewVBox(
+		widget.NewLabel("todo"),
+	)
+}
 
 func main(){
 	// call the gui
@@ -22,8 +26,13 @@ func main(){
 	w := a.NewWindow("Todo App")
 	w.Resize(fyne.NewSize(600,600))
 
+	tabs := widget.NewTabContainer(
+		widget.NewTabItemWithIcon("Tasks",theme.ContentPasteIcon(),test()),
+		widget.NewTabItemWithIcon("Settings",theme.SettingsIcon(),test()),	
+	)
 
 	w.SetContent(widget.NewVBox(
+		tabs,
 		widget.NewLabel("todo app"),
 	))
 
