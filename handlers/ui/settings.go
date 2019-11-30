@@ -5,17 +5,27 @@ import (
 	"fyne.io/fyne/widget"
 	"fyne.io/fyne"
 	"fyne.io/fyne/theme"
+	"fyne.io/fyne/layout"
 )
 
-func Settings() fyne.widget {
-	theme := []string{"Light Mode"}
+func Settings() fyne.Widget {
+	themeSettings := []string{"Light Mode"}
 	radio := widget.NewRadio(
-		theme,
+		themeSettings,
 		func(s string){
 			if s == "Light Mode" {
 				fyne.CurrentApp().Settings().SetTheme(theme.LightTheme())
 			}else{
 				fyne.CurrentApp().Settings().SetTheme(theme.DarkTheme())
 			}
-		}
+		},
 	)
+
+	container := widget.NewVBox(
+		fyne.NewContainerWithLayout(
+			layout.NewGridLayout(2),
+			radio,
+		),
+	)
+	return container
+}

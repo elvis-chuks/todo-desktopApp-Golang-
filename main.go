@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"./handlers"
 	"./handlers/models"
+	"./handlers/ui"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/widget"
 	"fyne.io/fyne"
@@ -28,12 +29,11 @@ func main(){
 
 	tabs := widget.NewTabContainer(
 		widget.NewTabItemWithIcon("Tasks",theme.ContentPasteIcon(),test()),
-		widget.NewTabItemWithIcon("Settings",theme.SettingsIcon(),test()),	
+		widget.NewTabItemWithIcon("Settings",theme.SettingsIcon(),ui.Settings()),	
 	)
 
 	w.SetContent(widget.NewVBox(
 		tabs,
-		widget.NewLabel("todo app"),
 	))
 
 	jsonFile,err := os.Open("data.json")
