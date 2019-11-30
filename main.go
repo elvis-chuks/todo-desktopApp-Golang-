@@ -28,7 +28,7 @@ func main(){
 	w.Resize(fyne.NewSize(600,600))
 
 	tabs := widget.NewTabContainer(
-		widget.NewTabItemWithIcon("Tasks",theme.ContentPasteIcon(),test()),
+		widget.NewTabItemWithIcon("Tasks",theme.ContentPasteIcon(),ui.Tasks()),
 		widget.NewTabItemWithIcon("Settings",theme.SettingsIcon(),ui.Settings()),	
 	)
 
