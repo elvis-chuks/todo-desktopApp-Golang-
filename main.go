@@ -13,6 +13,10 @@ import (
 	"fyne.io/fyne/widget"
 	"fyne.io/fyne"
 	"fyne.io/fyne/theme"
+	"fyne.io/fyne/canvas"
+	"fyne.io/fyne/layout"
+	// "fyne.io/fyne"
+	"image/color"
 )
 
 func test() fyne.Widget{
@@ -29,11 +33,19 @@ func main(){
 
 	tabs := widget.NewTabContainer(
 		widget.NewTabItemWithIcon("Tasks",theme.ContentPasteIcon(),ui.Tasks()),
+		widget.NewTabItemWithIcon("New Task",theme.FolderNewIcon(),ui.NewTask(w)),
 		widget.NewTabItemWithIcon("Settings",theme.SettingsIcon(),ui.Settings()),	
 	)
 
 	w.SetContent(widget.NewVBox(
 		tabs,
+		fyne.NewContainerWithLayout(
+			layout.NewFixedGridLayout(fyne.NewSize(600,90)),
+			&canvas.Rectangle{FillColor: color.RGBA{0x80, 167, 0, 0xff},
+			StrokeColor: color.RGBA{0xff, 0xff, 0xff, 0xff},
+			StrokeWidth: 1},
+		),
+		
 	))
 
 	jsonFile,err := os.Open("data.json")

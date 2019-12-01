@@ -17,5 +17,5 @@ func Biggest(arr []int) string {
 		}
 	}
 	
-	return strconv.Itoa(biggest)
+	return strconv.Itoa(biggest+1)
 }
