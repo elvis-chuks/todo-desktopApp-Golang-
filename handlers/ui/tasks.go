@@ -8,6 +8,8 @@ import (
 	"fmt"
 )
 
+
+
 func Tasks() fyne.Widget {
 
 	mainList := handlers.GetItems()
@@ -15,23 +17,30 @@ func Tasks() fyne.Widget {
 	list := widget.NewVBox()
 	// write function to open a dialog for setting tasks status
 	for _,i := range subList {
-		btn := widget.NewButton(fmt.Sprintf("ID : %v || Name : %v  ||  Description : %v",i.Id,i.Name,i.Description),nil)
+		// instead of button, create a widget with a label and button
+		btn := widget.NewButton("Action",nil)
+		taskWidget := widget.NewVBox(
+			widget.NewLabel(fmt.Sprintf("Task : %v",i.Id)),
+			widget.NewLabel(fmt.Sprintf("Name : %v",i.Name)),
+			widget.NewLabel(fmt.Sprintf("Description : %v",i.Description)),
+			btn,
+		)
+		
 
-		btn.Resize(fyne.NewSize(200,300))
+		// btn.Resize(fyne.NewSize(200,300))
 
-		list.Append(btn)
+		list.Append(taskWidget)
 	}
 	scroll := widget.NewScrollContainer(list)
 
-	scroll.Resize(fyne.NewSize(400, 400))
-
+	scroll.Resize(fyne.NewSize(600, 400))
+	TaskWid := fyne.NewContainer(
+		scroll,
+	)
 	container := widget.NewVBox(
 		widget.NewLabel("tasks"),
 		
-		fyne.NewContainer(
-			
-			scroll,
-		),
+		TaskWid,
 	)
 	return container
 }
